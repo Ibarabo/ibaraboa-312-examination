@@ -1,0 +1,77 @@
+#include <iostream>
+
+using namespace std;
+
+struct NODE {
+    float data;
+    NODE* link;
+};
+
+class Stack {
+    NODE* top;
+
+public:
+    Stack();
+    void Push(float value);
+    void Pop();
+    void Display();
+    ~Stack();
+};
+
+Stack::Stack() : top(nullptr) {}
+
+void Stack::Push(float value) {
+    NODE* newNode = new NODE;
+    newNode->data = value;
+    newNode->link = top;
+    top = newNode;
+}
+
+void Stack::Pop() {
+    if (top == nullptr) {
+        std::cout << "Stack underflow\n";
+        return;
+    }
+    NODE* temp = top;
+    top = top->link;
+    delete temp;
+}
+
+void Stack::Display() {
+    NODE* current = top;
+    while (current != nullptr) {
+        std::cout << current->data << " ";
+        current = current->link;
+    }
+    std::cout << std::endl;
+}
+
+Stack::~Stack() {
+    while (top != nullptr) {
+        NODE* temp = top;
+        top = top->link;
+        delete temp;
+    }
+}
+
+int main() {
+    Stack myStack;
+    myStack.Push(3.14);
+    myStack.Push(2.718);
+    myStack.Push(1.618);
+
+    std::cout << "Stack contents: ";
+    myStack.Display();
+
+    myStack.Pop();
+
+    std::cout << "After Pop: ";
+    myStack.Display();
+
+    return 0;
+}
+int main()
+{
+    cout << "Hello world!" << endl;
+    return 0;
+}
